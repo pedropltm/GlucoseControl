@@ -9,5 +9,7 @@ namespace GlucoseControl.Models
             : base(options)
         {
         }
+
+        public DbSet<Meal> Meals { get; set; } = null!;
     }
 }
