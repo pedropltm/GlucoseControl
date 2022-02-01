@@ -9,7 +9,5 @@ namespace GlucoseControl.Models
             : base(options)
         {
         }
-
-        public DbSet<Scouting> Scoutings { get; set; } = null!;
     }
 }
