@@ -81,7 +81,7 @@ namespace GlucoseControl.Controllers
             _context.Medicines.Add(medicine);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMedicine", new { id = medicine.Id }, medicine);
+            return CreatedAtAction(nameof(GetMedicine), new { id = medicine.Id }, medicine);
         }
 
         // DELETE: api/Medicines/5
