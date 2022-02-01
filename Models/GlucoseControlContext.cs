@@ -13,5 +13,6 @@ namespace GlucoseControl.Models
         public DbSet<Meal> Meals { get; set; } = null!;
         public DbSet<Medicine> Medicines { get; set; } = null!;
         public DbSet<Patient> Patients { get; set; } = null!;
+        public DbSet<Scouting> Scoutings { get; set; } = null!;
     }
 }
