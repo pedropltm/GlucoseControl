@@ -81,7 +81,7 @@ namespace GlucoseControl.Controllers
             _context.Scoutings.Add(scouting);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetScouting", new { id = scouting.Id }, scouting);
+            return CreatedAtAction(nameof(GetScouting), new { id = scouting.Id }, scouting);
         }
 
         // DELETE: api/Scoutings/5
