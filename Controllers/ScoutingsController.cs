@@ -25,6 +25,9 @@ namespace GlucoseControl.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Scouting>>> GetScoutings()
         {
+            await _context.Patients.ToListAsync();
+            await _context.Meals.ToListAsync();
+            await _context.Medicines.ToListAsync();
             return await _context.Scoutings.ToListAsync();
         }
 
@@ -32,6 +35,9 @@ namespace GlucoseControl.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Scouting>> GetScouting(long id)
         {
+            await _context.Patients.ToListAsync();
+            await _context.Meals.ToListAsync();
+            await _context.Medicines.ToListAsync();
             var scouting = await _context.Scoutings.FindAsync(id);
 
             if (scouting == null)
