@@ -24,15 +24,15 @@ public class MealsService
     public async Task<List<Meal>> GetAsync() =>
         await _mealsCollection.Find(_ => true).ToListAsync();
 
-    public async Task<Meal?> GetAsync(long id) =>
+    public async Task<Meal?> GetAsync(string id) =>
         await _mealsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     public async Task CreateAsync(Meal newMeal) =>
         await _mealsCollection.InsertOneAsync(newMeal);
 
-    public async Task UpdateAsync(long id, Meal updatedMeal) =>
+    public async Task UpdateAsync(string id, Meal updatedMeal) =>
         await _mealsCollection.ReplaceOneAsync(x => x.Id == id, updatedMeal);
 
-    public async Task RemoveAsync(long id) =>
+    public async Task RemoveAsync(string id) =>
         await _mealsCollection.DeleteOneAsync(x => x.Id == id);
 }

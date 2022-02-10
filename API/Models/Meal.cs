@@ -7,7 +7,7 @@ namespace GlucoseControl.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public long Id { get; set; }
+        public string? Id { get; set; }
         public DateTime DateTime { get; set; }
         public string? Description { get; set; }
     }

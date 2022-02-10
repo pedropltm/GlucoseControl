@@ -11,8 +11,8 @@ using GlucoseControl.Services;
 
 namespace GlucoseControl.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class MealsController : ControllerBase
     {
         private readonly MealsService _mealsService;
@@ -28,7 +28,7 @@ namespace GlucoseControl.Controllers
 
         // GET: api/Meals/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Meal>> GetMeal(long id)
+        public async Task<ActionResult<Meal>> GetMeal(string id)
         {
             var meal = await _mealsService.GetAsync(id);
 
@@ -43,7 +43,7 @@ namespace GlucoseControl.Controllers
         // PUT: api/Meals/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, Meal updatedMeal)
+        public async Task<IActionResult> PutMeal(string id, Meal updatedMeal)
         {
             var meal = await _mealsService.GetAsync(id);
 
@@ -71,7 +71,7 @@ namespace GlucoseControl.Controllers
 
         // DELETE: api/Meals/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMeal(long id)
+        public async Task<IActionResult> DeleteMeal(string id)
         {
             var meal = await _mealsService.GetAsync(id);
 
