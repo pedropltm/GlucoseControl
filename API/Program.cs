@@ -1,4 +1,5 @@
 using GlucoseControl.Models;
+using GlucoseControl.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<GlucoseControlContext>(opt =>
     opt.UseInMemoryDatabase("GlucoseControlList"));
 builder.Services.Configure<GlucoseControlDatabaseSettings>(
     builder.Configuration.GetSection("GlucoseControlDatabase"));
+builder.Services.AddSingleton<MealsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
