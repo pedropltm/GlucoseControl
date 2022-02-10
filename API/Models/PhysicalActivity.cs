@@ -1,3 +1,5 @@
+using System;
+
 namespace GlucoseControl.Models
 {
     public class PhysicalActivity

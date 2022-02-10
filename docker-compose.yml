@@ -5,7 +5,7 @@ services:
   api:
     image: pedropltm/glucosecontrolapi:latest
     ports:
-      - "8080:80"
+      - "7121:80"
     networks:
       - glucose-control-network
     depends_on:
