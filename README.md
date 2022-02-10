@@ -21,7 +21,10 @@
        3.2 Abrir o terminal
        3.3 Navegar até o diretório clonado
        3.4 docker --version
-       3.5 docker-compose up -d
+       3.5 docker image build -t seuambienteDockerHUB/glucosecontrolapi .
+       3.6 docker container run --name DockerDotnetAPI -p 8080:80 seuambienteDockerHUB/glucosecontrolapi
+       3.7 docker image push seuambienteDockerHUB/glucosecontrolapi
+       3.8 docker-compose up -d
 
 ## API
 
