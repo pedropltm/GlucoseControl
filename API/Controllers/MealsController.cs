@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GlucoseControl.Models;
+using GlucoseControl.Services;
 
 namespace GlucoseControl.Controllers
 {
@@ -14,25 +15,22 @@ namespace GlucoseControl.Controllers
     [ApiController]
     public class MealsController : ControllerBase
     {
-        private readonly GlucoseControlContext _context;
+        private readonly MealsService _mealsService;
 
-        public MealsController(GlucoseControlContext context)
+        public MealsController(MealsService mealsService)
         {
-            _context = context;
+            _mealsService = mealsService;
         }
 
         // GET: api/Meals
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
-        {
-            return await _context.Meals.ToListAsync();
-        }
+        public async Task<List<Meal>> GetMeals() => await _mealsService.GetAsync();
 
         // GET: api/Meals/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Meal>> GetMeal(long id)
         {
-            var meal = await _context.Meals.FindAsync(id);
+            var meal = await _mealsService.GetAsync(id);
 
             if (meal == null)
             {
@@ -45,30 +43,18 @@ namespace GlucoseControl.Controllers
         // PUT: api/Meals/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, Meal meal)
+        public async Task<IActionResult> PutMeal(long id, Meal updatedMeal)
         {
-            if (id != meal.Id)
+            var meal = await _mealsService.GetAsync(id);
+
+            if (meal is null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(meal).State = EntityState.Modified;
+            updatedMeal.Id = meal.Id;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MealExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _mealsService.UpdateAsync(id, updatedMeal);
 
             return NoContent();
         }
@@ -76,10 +62,9 @@ namespace GlucoseControl.Controllers
         // POST: api/Meals
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Meal>> PostMeal(Meal meal)
+        public async Task<IActionResult> PostMeal(Meal meal)
         {
-            _context.Meals.Add(meal);
-            await _context.SaveChangesAsync();
+            await _mealsService.CreateAsync(meal);
 
             return CreatedAtAction(nameof(GetMeal), new { id = meal.Id }, meal);
         }
@@ -88,21 +73,16 @@ namespace GlucoseControl.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMeal(long id)
         {
-            var meal = await _context.Meals.FindAsync(id);
+            var meal = await _mealsService.GetAsync(id);
+
             if (meal == null)
             {
                 return NotFound();
             }
 
-            _context.Meals.Remove(meal);
-            await _context.SaveChangesAsync();
+            await _mealsService.RemoveAsync(meal.Id);
 
             return NoContent();
-        }
-
-        private bool MealExists(long id)
-        {
-            return _context.Meals.Any(e => e.Id == id);
         }
     }
 }
