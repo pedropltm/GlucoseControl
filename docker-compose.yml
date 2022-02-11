@@ -1,11 +1,20 @@
 version: '3'
+
+networks:
+  glucose-control-network:
+    driver: bridge
+
 services:
   
   #backend api
   api:
-    image: pedropltm/glucosecontrolapi:latest
+    image: pedropltm/glucosecontrolapi
     ports:
-      - "7121:80"
+      - "5035:80"
+      - "7121:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets/:/root/.microsoft/usersecrets
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https/
     networks:
       - glucose-control-network
     depends_on:
@@ -42,7 +51,3 @@ services:
       - mongo
     networks:
       - glucose-control-network
-
-networks:
-  glucose-control-network:
-    driver: bridge
