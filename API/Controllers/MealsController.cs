@@ -17,22 +17,21 @@ namespace GlucoseControl.Controllers
     {
         private readonly MealsService _mealsService;
 
-        public MealsController(MealsService mealsService)
-        {
+        public MealsController(MealsService mealsService) => 
             _mealsService = mealsService;
-        }
 
         // GET: api/Meals
         [HttpGet]
-        public async Task<List<Meal>> GetMeals() => await _mealsService.GetAsync();
+        public async Task<List<Meal>> GetMeals() =>
+            await _mealsService.GetAsync();
 
         // GET: api/Meals/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Meal>> GetMeal(string id)
         {
             var meal = await _mealsService.GetAsync(id);
 
-            if (meal == null)
+            if (meal is null)
             {
                 return NotFound();
             }
@@ -42,7 +41,7 @@ namespace GlucoseControl.Controllers
 
         // PUT: api/Meals/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> PutMeal(string id, Meal updatedMeal)
         {
             var meal = await _mealsService.GetAsync(id);
@@ -61,7 +60,7 @@ namespace GlucoseControl.Controllers
 
         // POST: api/Meals
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("id:length(24)")]
         public async Task<IActionResult> PostMeal(Meal meal)
         {
             await _mealsService.CreateAsync(meal);
@@ -70,7 +69,7 @@ namespace GlucoseControl.Controllers
         }
 
         // DELETE: api/Meals/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> DeleteMeal(string id)
         {
             var meal = await _mealsService.GetAsync(id);

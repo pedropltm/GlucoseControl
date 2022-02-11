@@ -10,6 +10,6 @@ namespace GlucoseControl.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         public DateTime DateTime { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; } = null!; //mandatory string property
     }
 }
