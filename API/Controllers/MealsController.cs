@@ -11,8 +11,8 @@ using GlucoseControl.Services;
 
 namespace GlucoseControl.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class MealsController : ControllerBase
     {
         private readonly MealsService _mealsService;
