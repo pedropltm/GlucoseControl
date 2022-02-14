@@ -13,6 +13,7 @@ RUN dotnet publish -c Release -o out
 # Generate runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-EXPOSE 80
+EXPOSE 5035
+EXPOSE 7121
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet","GlucoseControl.dll"]

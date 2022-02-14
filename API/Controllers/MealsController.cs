@@ -22,8 +22,10 @@ namespace GlucoseControl.Controllers
 
         // GET: api/Meals
         [HttpGet]
-        public async Task<List<Meal>> GetMeals() =>
-            await _mealsService.GetAsync();
+        public async Task<List<Meal>> GetMeals()
+        {
+            return await _mealsService.GetAsync();
+        }
 
         // GET: api/Meals/5
         [HttpGet("{id:length(24)}")]

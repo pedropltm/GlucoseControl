@@ -21,17 +21,27 @@ public class MealsService
             glucoseControlDatabaseSettings.Value.MealsCollectionName);
     }
 
-    public async Task<List<Meal>> GetAsync() =>
-        await _mealsCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Meal>> GetAsync()
+    {
+        return await _mealsCollection.Find(_ => true).ToListAsync();
+    }
 
-    public async Task<Meal?> GetAsync(string id) =>
-        await _mealsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    public async Task<Meal?> GetAsync(string id)
+    {
+        return await _mealsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    }
 
-    public async Task CreateAsync(Meal newMeal) =>
+    public async Task<Meal> CreateAsync(Meal newMeal)
+    {
         await _mealsCollection.InsertOneAsync(newMeal);
+        return newMeal;
+    }
 
-    public async Task UpdateAsync(string id, Meal updatedMeal) =>
+    public async Task<Meal> UpdateAsync(string id, Meal updatedMeal)
+    {
         await _mealsCollection.ReplaceOneAsync(x => x.Id == id, updatedMeal);
+        return updatedMeal;
+    }
 
     public async Task RemoveAsync(string id) =>
         await _mealsCollection.DeleteOneAsync(x => x.Id == id);
