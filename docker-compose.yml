@@ -11,15 +11,10 @@ services:
   api:
     image: pedropltm/glucosecontrolapi
     volumes:
-      - ./API:/api
+      - ./API:/API
     ports:
       - "5035:80"
       - "7121:443"
-    #volumes:
-    #  - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-    #  - ${HOME}/.aspnet/https:/root/.aspnet/https/
-    #environment:
-    #  MongoDB__Host: mongo
     networks:
       - glucose-control-network
     depends_on:
@@ -32,11 +27,9 @@ services:
     #environment:
     #  MONGO_INITDB_ROOT_USERNAME: root
     #  MONGO_INITDB_ROOT_PASSWORD: example
-      # MONGO_INITDB_DATABASE: GlucoseControlDevelop
+    #  MONGO_INITDB_DATABASE: GlucoseControlDevelop
     ports:
       - "27017:27017"
-    volumes:
-      - ${WEBAPP_STORAGE_HOME}/site:/data/db
     networks:
       - glucose-control-network
   
