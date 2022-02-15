@@ -62,7 +62,7 @@ namespace GlucoseControl.Controllers
 
         // POST: api/PhysicalActivities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("id:length(24)")]
+        [HttpPost]
         public async Task<IActionResult> PostPhysicalActivity(PhysicalActivity physicalActivity)
         {
             await _physicalActivitiesService.CreateAsync(physicalActivity);

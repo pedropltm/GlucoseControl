@@ -62,7 +62,7 @@ namespace GlucoseControl.Controllers
 
         // POST: api/Patients
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("id:length(24)")]
+        [HttpPost]
         public async Task<IActionResult> PostPatient(Patient patient)
         {
             await _patientsService.CreateAsync(patient);
