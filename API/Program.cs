@@ -11,6 +11,10 @@ builder.Services.AddDbContext<GlucoseControlContext>(opt =>
 builder.Services.Configure<GlucoseControlDatabaseSettings>(
     builder.Configuration.GetSection("GlucoseControlDatabase"));
 builder.Services.AddSingleton<MealsService>();
+builder.Services.AddSingleton<MedicinesService>();
+builder.Services.AddSingleton<PatientsService>();
+builder.Services.AddSingleton<PhysicalActivitiesService>();
+builder.Services.AddSingleton<ScoutingsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
