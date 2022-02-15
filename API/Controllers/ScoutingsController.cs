@@ -7,40 +7,33 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GlucoseControl.Models;
+using GlucoseControl.Services;
 
 namespace GlucoseControl.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Scoutings")]
     [ApiController]
     public class ScoutingsController : ControllerBase
     {
-        private readonly GlucoseControlContext _context;
+        private readonly ScoutingsService _scoutingsService;
 
-        public ScoutingsController(GlucoseControlContext context)
-        {
-            _context = context;
-        }
+        public ScoutingsController(ScoutingsService scoutingsService) => 
+            _scoutingsService = scoutingsService;
 
         // GET: api/Scoutings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Scouting>>> GetScoutings()
+        public async Task<List<Scouting>> GetScoutings()
         {
-            await _context.Patients.ToListAsync();
-            await _context.Meals.ToListAsync();
-            await _context.Medicines.ToListAsync();
-            return await _context.Scoutings.ToListAsync();
+            return await _scoutingsService.GetAsync();
         }
 
         // GET: api/Scoutings/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Scouting>> GetScouting(long id)
+        [HttpGet("{id:length(24)}")]
+        public async Task<ActionResult<Scouting>> GetScouting(string id)
         {
-            await _context.Patients.ToListAsync();
-            await _context.Meals.ToListAsync();
-            await _context.Medicines.ToListAsync();
-            var scouting = await _context.Scoutings.FindAsync(id);
+            var scouting = await _scoutingsService.GetAsync(id);
 
-            if (scouting == null)
+            if (scouting is null)
             {
                 return NotFound();
             }
@@ -50,31 +43,19 @@ namespace GlucoseControl.Controllers
 
         // PUT: api/Scoutings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutScouting(long id, Scouting scouting)
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> PutScouting(string id, Scouting updatedScouting)
         {
-            if (id != scouting.Id)
+            var scouting = await _scoutingsService.GetAsync(id);
+
+            if (scouting is null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(scouting).State = EntityState.Modified;
+            updatedScouting.Id = scouting.Id;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ScoutingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _scoutingsService.UpdateAsync(id, updatedScouting);
 
             return NoContent();
         }
@@ -82,33 +63,27 @@ namespace GlucoseControl.Controllers
         // POST: api/Scoutings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Scouting>> PostScouting(Scouting scouting)
+        public async Task<IActionResult> PostScouting(Scouting scouting)
         {
-            _context.Scoutings.Add(scouting);
-            await _context.SaveChangesAsync();
+            await _scoutingsService.CreateAsync(scouting);
 
             return CreatedAtAction(nameof(GetScouting), new { id = scouting.Id }, scouting);
         }
 
         // DELETE: api/Scoutings/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteScouting(long id)
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> DeleteScouting(string id)
         {
-            var scouting = await _context.Scoutings.FindAsync(id);
+            var scouting = await _scoutingsService.GetAsync(id);
+
             if (scouting == null)
             {
                 return NotFound();
             }
 
-            _context.Scoutings.Remove(scouting);
-            await _context.SaveChangesAsync();
+            await _scoutingsService.RemoveAsync(scouting.Id);
 
             return NoContent();
-        }
-
-        private bool ScoutingExists(long id)
-        {
-            return _context.Scoutings.Any(e => e.Id == id);
         }
     }
 }
