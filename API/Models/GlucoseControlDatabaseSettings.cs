@@ -8,4 +8,5 @@ public class GlucoseControlDatabaseSettings
 
     public string MealsCollectionName { get; set; } = null!;
     public string MedicinesCollectionName { get; set; } = null!;
+    public string PatientsCollectionName { get; set; } = null!;
 }
