@@ -11,7 +11,7 @@ using GlucoseControl.Services;
 
 namespace GlucoseControl.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Medicines")]
     [ApiController]
     public class MedicinesController : ControllerBase
     {
