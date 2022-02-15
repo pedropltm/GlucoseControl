@@ -6,8 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddDbContext<GlucoseControlContext>(opt =>
-    opt.UseInMemoryDatabase("GlucoseControlList"));
 builder.Services.Configure<GlucoseControlDatabaseSettings>(
     builder.Configuration.GetSection("GlucoseControlDatabase"));
 builder.Services.AddSingleton<MealsService>();
