@@ -13,8 +13,8 @@ services:
     volumes:
       - ./API:/API
     ports:
-      - "5035:80"
-      - "7121:443"
+      - "5000:80"
+      - "5001:443"
     networks:
       - glucose-control-network
     depends_on:
