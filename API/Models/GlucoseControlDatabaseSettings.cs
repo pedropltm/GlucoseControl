@@ -10,4 +10,5 @@ public class GlucoseControlDatabaseSettings
     public string MedicinesCollectionName { get; set; } = null!;
     public string PatientsCollectionName { get; set; } = null!;
     public string PhysicalActivitiesCollectionName { get; set; } = null!;
+    public string ScoutingsCollectionName { get; set; } = null!;
 }
