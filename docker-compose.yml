@@ -50,3 +50,15 @@ services:
       - mongo
     networks:
       - glucose-control-network
+
+  #frontend api interface
+  frontend:
+    build: 
+      context: ./Frontend
+      dockerfile: ./Frontend/Dockerfile
+    volumes:
+      - ./Frontend:/app
+    ports:
+      - '3000:3000'
+    networks:
+      - glucose-control-network
