@@ -28,6 +28,124 @@
 
 ## API
 
+### Editing the API
+
+  #### Requirements
+
+    * VS Code (recommended) or another IDE of your personal preference
+    * Docker For Windows
+    * Have an account on Docker HUB
+
+  #### Step by Step
+
+    1. Clone the project inside your local folder choosen;
+    2. Open the project folder in VS Code;
+    3. In VS Code:
+      3.1 Install extensions
+        3.1.1 C# for Visual Studio Code (or similar, if you prefer another IDE)
+        3.1.2 Docker for Visual Studio Code (or similar, if you prefer another IDE)
+    4. Make your changes
+    5. Update your docker container
+
+### Updating docker container
+
+  #### Requirements
+
+    * VS Code (recommended) or another IDE of your personal preference
+    * Docker For Windows
+    * Have an account on Docker HUB
+
+  #### Step by Step
+
+  1. Clone the project inside your local folder choosen (if you did not yet)
+  2. Open the terminal
+  3. Navigate to the cloned folder
+  4. Build your new image version with your modifications
+
+  ```powershell
+  docker image build -t yourEnvDockerHUB/glucosecontrolapi:version-name .
+  ```
+
+  5. Create the container with the new image version
+
+  ```powershell
+  docker container run --name GlucoseControlApi -p 8080:80 yourEnvDockerHUB/glucosecontrolapi:version-name
+  ```
+
+  6. Push the image for the DockerHUB repository
+
+  ```powershell
+  docker image push yourEnvDockerHUB/glucosecontrolapi:version-name
+  ```
+
+  7. Update your docker compose file with the new dockerfile updated version
+
+  ```powershell
+  docker-compose up -d
+  ```
+
+### Executing the API
+
+  #### Requirements
+
+    * Git Bash;
+    * Docker For Windows
+
+  #### Recommended
+
+    * Git Extensions, Source Tree or Smart Git
+
+  #### Step by Step
+
+    1. Clone the project inside your local folder choosen (if you did not yet)
+    2. Open the terminal
+    3. Navigate to the cloned folder
+    4. > docker --version
+    5. > docker-compose up -d
+
+### Testing the API
+
+  #### Requirements
+  
+    * Insomnia (recommended) or another IDE of your personal preference
+    * Docker For Windows
+
+  #### Step by Step
+
+    1. Execute the API (as explained before)
+    2. Open Insomnia
+    3. API Microservices
+      3.1. Meals
+        GetMeals
+        GetMeal
+        PostMeal
+        PutMeal
+        DeleteMeal
+      3.2. Medicines
+        GetMedicines
+        GetMedicine
+        PostMedicine
+        PutMedicine
+        DeleteMedicine
+      3.3. Patients
+        GetPatient
+        GetPatient
+        PostPatient
+        PutPatient
+        DeletePatient
+      3.3. PhysicalActivities
+        GetPhysicalActivities
+        GetPhysicalActivity
+        PostPhysicalActivity
+        PutPhysicalActivity
+        DeletePhysicalActivity
+      3.4. Scoutings
+        GetScoutings
+        GetScouting
+        PostScouting
+        PutScouting
+        DeleteScouting
+
 ### Swagger
 https://localhost:7121/swagger/
 
@@ -108,3 +226,98 @@ https://docs.microsoft.com/pt-br/visualstudio/containers/tutorial-multicontainer
 #### Udemy - Leonardo Moura Leitão, Arquiteto de Software
 Docker: Ferramenta essencial para Desenvolvedores
 https://www.udemy.com/course/curso-docker/learn/lecture/7559986
+
+#### Yarn
+https://dev.to/aminnairi/preact-vite-docker-compose-in-5-easy-steps-j21
+
+#### Vite
+https://www.aroundcode.io/dockerizing-vite-react-app/
+
+
+## Terminal Summary Commands by Branch
+
+### branch-0001
+
+  ```powershell
+  dotnet new webapi -o GlucoseControl
+  ```
+
+  ```powershell
+  dotnet add package Microsoft.EntityFrameworkCore.InMemory --prerelease
+  ```
+
+  ```powershell
+  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --prerelease
+  ```
+
+  ```powershell
+  dotnet add package Microsoft.EntityFrameworkCore.Design --prerelease
+  ```
+
+  ```powershell
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer --prerelease
+  ```
+
+  ```powershell
+  dotnet tool install -g dotnet-aspnet-codegenerator --version 6.0.1 
+  ```
+
+  ```powershell
+  dotnet aspnet-codegenerator controller -name MealsController -async -api -m Meal -dc GlucoseControlContext -outDir Controllers
+  ```
+
+  ```powershell
+  dotnet aspnet-codegenerator controller -name MedicinesController -async -api -m Medicine -dc GlucoseControlContext -outDir Controllers
+  ```
+  
+  ```powershell
+  dotnet aspnet-codegenerator controller -name PatientsController -async -api -m Patient -dc GlucoseControlContext -outDir Controllers
+  ```
+  
+  ```powershell
+  dotnet aspnet-codegenerator controller -name ScoutingsController -async -api -m Scouting -dc GlucoseControlContext -outDir Controllers
+  ```
+
+### branch-0002
+
+Empty
+
+### branch-0003
+
+Empty
+
+### branch-0004
+
+#### Installing MongoDB
+```powershell
+dotnet add package MongoDB.driver
+```
+
+```powershell
+dotnet dev-certs https --trust
+```
+
+```powershell
+dotnet tool install -g Microsoft.dotnet-httprepl
+```
+
+```powershell
+httprepl https://localhost:7121/api/Meals
+```
+
+### branch-0005`
+
+#### Initializing repository creating package.json
+```powershell
+docker-compose run --name glucosecontrol-react-1 yarn init -y
+```
+
+#### Installing react
+```powershell
+docker-compose run --name glucosecontrol-yarn-1 yarn add react
+```
+
+#### Installing react with vite
+```powershell
+docker-compose run --name glucosecontrol-yarn-1 yarn add react vite
+```
