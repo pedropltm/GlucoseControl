@@ -50,3 +50,16 @@ services:
       - mongo
     networks:
       - glucose-control-network
+
+  yarn:
+    image: node:16.0.0
+    user: node
+    working_dir: /home/node
+    tty: true
+    stdin_open: true
+    entrypoint: yarn
+    command: --help
+    volumes:
+      - ./Frontend:/home/node
+    networks:
+      - glucose-control-network
