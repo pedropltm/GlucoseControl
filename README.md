@@ -233,6 +233,10 @@ https://dev.to/aminnairi/preact-vite-docker-compose-in-5-easy-steps-j21
 #### Vite
 https://www.aroundcode.io/dockerizing-vite-react-app/
 
+#### Sharklabs
+React.js + Docker: Desenvolvendo Web Apps
+https://sharklabs.com.br/reactjs-docker-desenvolvendo-web-apps/
+
 
 ## Terminal Summary Commands by Branch
 
@@ -307,17 +311,27 @@ httprepl https://localhost:7121/api/Meals
 
 ### branch-0005`
 
-#### Initializing repository creating package.json
+#### Initializes the repository crating package.json and removes the container in the end of execution
 ```powershell
-docker-compose run --name glucosecontrol-react-1 yarn init -y
+docker-compose run --rm --name glucosecontrol-yarn-1  yarn init -y
 ```
 
-#### Installing react
+#### Installs react and removes the container in the end of execution
 ```powershell
-docker-compose run --name glucosecontrol-yarn-1 yarn add react
+docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react
 ```
 
 #### Installing react with vite
 ```powershell
-docker-compose run --name glucosecontrol-yarn-1 yarn add react vite
+docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react vite
+```
+
+#### Starts the docker-compose services containers without creates a new container if it already exists
+```powershell
+docker-compose up -d --no-recreate
+```
+
+#### Starts the docker-compose yarn service container without creates a new container if it already exists
+```powershell
+docker-compose up -d --no-recreate yarn
 ```
