@@ -345,3 +345,8 @@ docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react-dom
 ```powershell
 docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/core @babel/cli @babel/preset-env -D
 ```
+
+#### Installs babel preset-react and removes the container in the end of execution
+```powershell
+docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/preset-react -D
+```
