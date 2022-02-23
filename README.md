@@ -335,3 +335,13 @@ docker-compose up -d --no-recreate
 ```powershell
 docker-compose up -d --no-recreate yarn
 ```
+
+#### Installs react-dom and removes the container in the end of execution
+```powershell
+docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react-dom
+```
+
+#### Installs babel compiler and removes the container in the end of execution
+```powershell
+docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/core @babel/cli @babel/preset-env -D
+```
