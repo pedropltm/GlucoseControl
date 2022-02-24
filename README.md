@@ -63,25 +63,25 @@
   4. Build your new image version with your modifications
 
   ```powershell
-  docker image build -t yourEnvDockerHUB/glucosecontrolapi:version-name .
+  $ docker image build -t yourEnvDockerHUB/glucosecontrolapi:version-name .
   ```
 
   5. Create the container with the new image version
 
   ```powershell
-  docker container run --name GlucoseControlApi -p 8080:80 yourEnvDockerHUB/glucosecontrolapi:version-name
+  $ docker container run --name GlucoseControlApi -p 8080:80 yourEnvDockerHUB/glucosecontrolapi:version-name
   ```
 
   6. Push the image for the DockerHUB repository
 
   ```powershell
-  docker image push yourEnvDockerHUB/glucosecontrolapi:version-name
+  $ docker image push yourEnvDockerHUB/glucosecontrolapi:version-name
   ```
 
   7. Update your docker compose file with the new dockerfile updated version
 
   ```powershell
-  docker-compose up -d
+  $ docker-compose up -d
   ```
 
 ### Executing the API
@@ -243,43 +243,43 @@ https://sharklabs.com.br/reactjs-docker-desenvolvendo-web-apps/
 ### branch-0001
 
   ```powershell
-  dotnet new webapi -o GlucoseControl
+  $ dotnet new webapi -o GlucoseControl
   ```
 
   ```powershell
-  dotnet add package Microsoft.EntityFrameworkCore.InMemory --prerelease
+  $ dotnet add package Microsoft.EntityFrameworkCore.InMemory --prerelease
   ```
 
   ```powershell
-  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --prerelease
+  $ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --prerelease
   ```
 
   ```powershell
-  dotnet add package Microsoft.EntityFrameworkCore.Design --prerelease
+  $ dotnet add package Microsoft.EntityFrameworkCore.Design --prerelease
   ```
 
   ```powershell
-  dotnet add package Microsoft.EntityFrameworkCore.SqlServer --prerelease
+  $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --prerelease
   ```
 
   ```powershell
-  dotnet tool install -g dotnet-aspnet-codegenerator --version 6.0.1 
+  $ dotnet tool install -g dotnet-aspnet-codegenerator --version 6.0.1 
   ```
 
   ```powershell
-  dotnet aspnet-codegenerator controller -name MealsController -async -api -m Meal -dc GlucoseControlContext -outDir Controllers
+  $ dotnet aspnet-codegenerator controller -name MealsController -async -api -m Meal -dc GlucoseControlContext -outDir Controllers
   ```
 
   ```powershell
-  dotnet aspnet-codegenerator controller -name MedicinesController -async -api -m Medicine -dc GlucoseControlContext -outDir Controllers
+  $ dotnet aspnet-codegenerator controller -name MedicinesController -async -api -m Medicine -dc GlucoseControlContext -outDir Controllers
   ```
   
   ```powershell
-  dotnet aspnet-codegenerator controller -name PatientsController -async -api -m Patient -dc GlucoseControlContext -outDir Controllers
+  $ dotnet aspnet-codegenerator controller -name PatientsController -async -api -m Patient -dc GlucoseControlContext -outDir Controllers
   ```
   
   ```powershell
-  dotnet aspnet-codegenerator controller -name ScoutingsController -async -api -m Scouting -dc GlucoseControlContext -outDir Controllers
+  $ dotnet aspnet-codegenerator controller -name ScoutingsController -async -api -m Scouting -dc GlucoseControlContext -outDir Controllers
   ```
 
 ### branch-0002
@@ -294,59 +294,64 @@ Empty
 
 #### Installing MongoDB
 ```powershell
-dotnet add package MongoDB.driver
+$ dotnet add package MongoDB.driver
 ```
 
 ```powershell
-dotnet dev-certs https --trust
+$ dotnet dev-certs https --trust
 ```
 
 ```powershell
-dotnet tool install -g Microsoft.dotnet-httprepl
+$ dotnet tool install -g Microsoft.dotnet-httprepl
 ```
 
 ```powershell
-httprepl https://localhost:7121/api/Meals
+$ httprepl https://localhost:7121/api/Meals
 ```
 
 ### branch-0005`
 
 #### Initializes the repository crating package.json and removes the container in the end of execution
 ```powershell
-docker-compose run --rm --name glucosecontrol-yarn-1  yarn init -y
+$ docker-compose run --rm --name glucosecontrol-yarn-1  yarn init -y
 ```
 
 #### Installs react and removes the container in the end of execution
 ```powershell
-docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react
+$ docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react
 ```
 
 #### Installing react with vite
 ```powershell
-docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react vite
+$ docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react vite
 ```
 
 #### Starts the docker-compose services containers without creates a new container if it already exists
 ```powershell
-docker-compose up -d --no-recreate
+$ docker-compose up -d --no-recreate
 ```
 
 #### Starts the docker-compose yarn service container without creates a new container if it already exists
 ```powershell
-docker-compose up -d --no-recreate yarn
+$ docker-compose up -d --no-recreate yarn
 ```
 
 #### Installs react-dom and removes the container in the end of execution
 ```powershell
-docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react-dom
+$ docker-compose run --rm --name glucosecontrol-yarn-1 yarn add react-dom
 ```
 
 #### Installs babel compiler and removes the container in the end of execution
 ```powershell
-docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/core @babel/cli @babel/preset-env -D
+$ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/core @babel/cli @babel/preset-env -D
 ```
 
 #### Installs babel preset-react and removes the container in the end of execution
 ```powershell
-docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/preset-react -D
+$ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/preset-react -D
+```
+
+#### Installs webpack and webpack-cli dependencies and removes the container after its execution
+```powershell
+$ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add webpack webpack-cli -D
 ```
