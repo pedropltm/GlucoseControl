@@ -360,3 +360,8 @@ $ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add webpack webpack
 ```powershell
 $ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add babel-loader -D
 ```
+
+#### Updates webpack bundle.js file and removes the container after its execution
+```powershell
+$ docker-compose run --rm --name glucosecontrol-yarn-1 yarn webpack
+```
