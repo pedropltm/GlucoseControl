@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+    mode: 'development',
     entry: path.resolve(__dirname,'src', 'index.jsx'), // "__dirname" busca o diretório onde está a instrução
     output: {
         path: path.resolve(__dirname, 'dist'),
