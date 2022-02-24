@@ -355,3 +355,8 @@ $ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add @babel/preset-r
 ```powershell
 $ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add webpack webpack-cli -D
 ```
+
+#### Installs babel-loeader dependency and removes the container after its execution
+```powershell
+$ docker-compose run --rm --name glucosecontrol-yarn-1  yarn add babel-loader -D
+```
